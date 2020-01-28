@@ -212,9 +212,9 @@ export default {
   padding: 20px;
 }
 
-.problem_table {
-  min-height: 800px;
-}
+/* .el-main {
+  min-height: 850px;
+} */
 a{
     text-decoration: none;
 }

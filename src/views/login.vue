@@ -63,11 +63,13 @@ export default {
           this.$http
             .post("/login", formData)
             .then(res => {
+              console.log(res)
               if (res.data.success === true) {
                 let data = res.data.data;
                 window.sessionStorage.setItem("token", data.token);
                 window.sessionStorage.setItem("username", data.username);
                 window.sessionStorage.setItem("id", data.id);
+                
                 this.$store.commit("login", data);
                 this.$message.success("欢迎回来，" + data.username + "!");
                 setTimeout(() => {

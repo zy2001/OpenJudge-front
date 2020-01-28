@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/login'
 import Index from 'views/index/index'
 import ProblemSet from 'views/problemset/problemset'
+import Problem from 'views/problem/problem'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,10 @@ const routes = [
   {
     path: '/problemset',
     component: ProblemSet
+  },
+  {
+    path: '/problem/:pid',
+    component: Problem
   }
 ]
 

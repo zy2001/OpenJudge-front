@@ -1,14 +1,13 @@
 <template>
   <div id="app">
+    
     <el-container>
       <nav-bar v-show="show"></nav-bar>
       <keep-alive>
-      <router-view style="margin-top: 60px"></router-view>
-      </keep-alive>
-      <el-footer v-show="show">
-
-      </el-footer>
-    </el-container>
+        <router-view class="main"></router-view>
+      </keep-alive></el-container>
+      <el-footer v-show="show"></el-footer>
+    
   </div>
 </template>
 
@@ -38,5 +37,10 @@ export default {
   min-width: 1180px;
   width: 1180px;
   margin: 0 auto;
+}
+
+.main {
+  margin-top: 60px;
+  min-height: 840px;
 }
 </style>

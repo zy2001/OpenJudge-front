@@ -9,6 +9,10 @@ import './assets/css/gloable.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
+
+// axios.defaults.baseURL = "http://www.openjudge.top:8887"
+// axios.defaults.baseURL = "http://121.36.13.125:8887"
+// axios.defaults.baseURL = "http://www.openjudge.online:8887"
 axios.defaults.baseURL = "http://localhost:8887"
 Vue.prototype.$http = axios
 

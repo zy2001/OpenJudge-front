@@ -57,29 +57,32 @@ export default {
     login() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
+          //填写账号密码
           let formData = new FormData();
           formData.append("username", this.loginForm.username);
           formData.append("password", this.loginForm.password);
+          //发送登录请求
           this.$http
             .post("/login", formData)
-            .then(res => {
-              console.log(res)
-              if (res.data.success === true) {
-                let data = res.data.data;
-                window.sessionStorage.setItem("token", data.token);
-                window.sessionStorage.setItem("username", data.username);
-                window.sessionStorage.setItem("id", data.id);
-                
-                this.$store.commit("login", data);
-                this.$message.success("欢迎回来，" + data.username + "!");
-                setTimeout(() => {
-                  this.$router.replace("/index");
-                }, 1000);
+            .then(({ data }) => {
+              console.log(data);
+              //登陆成功
+              if (data.success === true) {
+                let user = data.data;
+                window.sessionStorage.setItem("token", user.token);
+                window.sessionStorage.setItem("username", user.username);
+                window.sessionStorage.setItem("id", user.id);
+                //存用户信息
+                this.$store.commit("login", user);
+                this.$message.success("欢迎回来，" + user.username + "!");
+                //跳转
+                this.$router.replace("/index");
               } else {
-                this.$message.error(res.data.message + "，登陆失败！");
+                this.$message.error(data.message + "，登陆失败！");
               }
             })
             .catch(err => {
+              console.log(err)
               this.$message.error("网络异常，登陆失败！");
             });
         }

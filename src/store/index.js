@@ -8,6 +8,9 @@ export default new Vuex.Store({
     user: {
       username: '',
       id: -1
+    },
+    problem: {
+      title: ''
     }
   },
   mutations: {
@@ -15,6 +18,9 @@ export default new Vuex.Store({
       console.log(res)
       state.user.id = res.id
       state.user.username = res.username
+    },
+    setTitle(state, title) {
+      state.problem.title = title
     }
   },
   actions: {

@@ -1,6 +1,6 @@
 <template>
   <el-main>
-    <el-table :data="problemSet.itemList" stripe class="problem_table">
+    <el-table :data="problemSet.itemList" stripe>
       <el-table-column prop="pid" label="#" width="80"></el-table-column>
       <el-table-column label="题目" width="520">
         <template slot-scope="scope">

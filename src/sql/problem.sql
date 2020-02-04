@@ -11,8 +11,8 @@ CREATE TABLE PROBLEM(
   CASE_COUNT INT,
   ACCEPT INT,
   TOTAL INT,
-  GMT_CREATED DATE,
-  GMT_MODIFIED DATE
+  GMT_CREATED DATETIME,
+  GMT_MODIFIED DATETIME
 );
 
 INSERT INTO PROBLEM VALUES(1, 'A + B Problem', 'Calculate A + B.', '1', 'Each line will contain two integers A and B. Process to end of file.', 'For each case, output A + B in one line.', '1', 1000, 65536, 2, 0, 0, NOW(), NOW());

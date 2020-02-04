@@ -6,12 +6,7 @@
       </el-select>
     </el-form-item>
     <el-form-item prop="code" label="源代码">
-      <el-input
-        type="textarea"
-        :autosize="{ minRows: 21, maxRows: 25}"
-        :rows="2"
-        v-model="submitForm.code"
-      ></el-input>
+      <el-input type="textarea" :autosize="{ minRows: 21, maxRows: 25}" :rows="2" v-model="submitForm.code"></el-input>
     </el-form-item>
     <el-form-item style="text-align: right">
       <el-button plain @click="submit">提交</el-button>

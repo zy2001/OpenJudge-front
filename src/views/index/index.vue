@@ -1,14 +1,15 @@
 <template>
   <el-main>
-    
   </el-main>
 </template>
 
 <script>
 // import ProblemTable from 'views/problemset/problemset'
+// import Login from "components/content/nav_bar/login";
 export default {
   components: {
     // ProblemTable
+    // Login
   },
   data() {
     return {

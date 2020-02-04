@@ -4,7 +4,9 @@ import { Container, Header, Main, Footer } from 'element-ui'
 import { Menu, MenuItem, Submenu } from 'element-ui'
 import { Table, TableColumn,  Progress } from 'element-ui'
 import { Pagination } from 'element-ui'
-import { Tabs, TabPane } from 'element-ui'
+import { Tabs, TabPane, Dialog } from 'element-ui'
+
+Vue.use(Dialog)
 
 Vue.use(Tabs)
 Vue.use(TabPane)

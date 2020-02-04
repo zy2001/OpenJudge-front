@@ -27,17 +27,7 @@ export default {
       submitStatus: {
         total: 0,
         size: 20,
-        itemList: [
-          {
-            runId: 1,
-            status: 1,
-            runTime: '426ms',
-            runMemory: '1920KB',
-            language: 'C++',
-            gmtCreated: '2020-2-3 20:20:20',
-            author: 'zy2000'
-          }
-        ]
+        itemList: []
       }
     };
   },
@@ -45,20 +35,20 @@ export default {
     //status翻页
     currentChange(page) {
       console.log(page);
-    },
+    }
   },
   created() {
     let formData = new FormData();
-    formData.append('pid', this.$route.params.pid)
-    formData.append('page', 1)
-    formData.append('size', 20)
+    formData.append("pid", this.$route.params.pid);
+    formData.append("page", 1);
+    formData.append("size", 20);
     this.$http
       .post("/submitStatus", formData)
       .then(({ data }) => {
-        console.log(data)
+        console.log(data);
         if (data.success === true) {
           this.submitStatus = data.data;
-        //   this.$store.commit('setTitle', this.problem.title)
+          //   this.$store.commit('setTitle', this.problem.title)
         }
       })
       .catch(err => {

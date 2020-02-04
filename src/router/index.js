@@ -4,16 +4,13 @@ import VueRouter from 'vue-router'
 //deal with navigating to current location is not allowed
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error=> error)
+  return routerPush.call(this, location).catch(error => error)
 }
 
-
-// import Login from '../views/login'
 // import Index from 'views/index/index'
 // import ProblemSet from 'views/problemset/problemset'
 // import Problem from 'views/problem/problem'
 
-const Login = () => import('views/login')
 const Index = () => import('views/index/index')
 const ProblemSet = () => import('views/problemset/problemset')
 const Problem = () => import('views/problem/problem')
@@ -27,10 +24,6 @@ const routes = [
   {
     path: '/',
     redirect: '/index'
-  },
-  {
-    path: '/login',
-    component: Login
   },
   {
     path: '/index',

@@ -11,7 +11,9 @@ export default new Vuex.Store({
     },
     problem: {
       title: ''
-    }
+    },
+    loginVisible: false,
+    registerVisible: false
   },
   mutations: {
     login(state, res) {
@@ -21,6 +23,12 @@ export default new Vuex.Store({
     },
     setTitle(state, title) {
       state.problem.title = title
+    },
+    showLoginDialog(state, val) {
+      state.loginVisible = val
+    },
+    showRegisterDialog(state, val) {
+      state.registerVisible = val
     }
   },
   actions: {

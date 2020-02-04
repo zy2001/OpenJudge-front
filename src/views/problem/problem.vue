@@ -15,7 +15,7 @@ import ClipBoard from "clipboard";
 export default {
   data() {
     return {
-      activeName: "status",
+      activeName: "detail",
     };
   },
   methods: {

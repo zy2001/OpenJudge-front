@@ -1,24 +1,35 @@
 <template>
-  <el-header class="header">
-    <el-menu router :default-active="$route.path" class="nav_bar" mode="horizontal">
-      <el-menu-item index="/index">首页</el-menu-item>
-      <el-menu-item index="/problemset">题库</el-menu-item>
-      <el-menu-item index="3">比赛</el-menu-item>
-      <el-menu-item index="4">提交状态</el-menu-item>
-      <el-menu-item v-if="$store.state.user.id === -1" index="/login" style="float: right">登录</el-menu-item>
-      <el-menu-item v-if="$store.state.user.id === -1" index="6" style="float: right">注册</el-menu-item>
-      <el-submenu v-if="$store.state.user.id !== -1" index="7" style="width: 90px; float: right">
-        <template slot="title">{{$store.state.user.username}}</template>
-        <el-menu-item index="7-1">选项1</el-menu-item>
-        <el-menu-item index="7-2">选项2</el-menu-item>
-        <el-menu-item @click="logout">退出</el-menu-item>
-      </el-submenu>
-    </el-menu>
-  </el-header>
+  <div>
+    <el-header class="header">
+      <el-menu router :default-active="getActive" class="nav_bar" mode="horizontal">
+        <el-menu-item index="/index">首页</el-menu-item>
+        <el-menu-item index="/problemset">题库</el-menu-item>
+        <el-menu-item index="/3">比赛</el-menu-item>
+        <el-menu-item index="/4">提交状态</el-menu-item>
+        <!-- <el-menu-item v-if="$store.state.user.id === -1" index="/login" style="float: right">登录</el-menu-item> -->
+        <el-menu-item v-if="$store.state.user.id === -1" @click="showLoginDialog" style="float: right">登录</el-menu-item>
+        <el-menu-item v-if="$store.state.user.id === -1" @click="showRegisterDialog" style="float: right">注册</el-menu-item>
+        <el-submenu v-if="$store.state.user.id !== -1" index="/7" style="width: 90px; float: right">
+          <template slot="title">{{$store.state.user.username}}</template>
+          <!-- <el-menu-item index="7-1">选项1</el-menu-item>
+          <el-menu-item index="7-2">选项2</el-menu-item> -->
+          <el-menu-item @click="logout">退出</el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </el-header>
+    <login></login>
+    <register></register>
+  </div>
 </template>
 
 <script>
+import Login from "components/content/nav_bar/login";
+import Register from 'components/content/nav_bar/register'
 export default {
+  components: {
+    Login,
+    Register
+  },
   data() {
     return {};
   },
@@ -31,9 +42,23 @@ export default {
         username: ""
       };
       this.$store.commit("login", obj);
+    },
+    showLoginDialog() {
+      this.$store.commit('showLoginDialog', true)
+    },
+    showRegisterDialog() {
+      this.$store.commit('showRegisterDialog', true)
     }
   },
-  computed: {},
+  computed: {
+    getActive() {
+      let ret = ""
+      if(-1 != this.$route.path.indexOf('problem')) ret = '/problemset'
+      else ret = this.$route.path
+      // console.log(ret)
+      return ret
+    }
+  },
   created() {
     console.log("created");
     let token = window.sessionStorage.getItem("token");

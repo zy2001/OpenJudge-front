@@ -135,12 +135,14 @@ export default {
           this.$http
             .post("/register", formData)
             .then(({ data }) => {
-              console.log(data);
+              // console.log(data);
               //注册成功
               if (data.success === true) {
                 this.$message.success(
                   this.registerForm.username + "，注册成功!"
                 );
+                //关闭注册窗口
+                this.$store.commit("showRegisterDialog", false);
               } else {
                 this.$message.error(data.message + "，注册失败!");
               }

@@ -55,11 +55,11 @@ export default {
     let formData = new FormData();
     formData.append("page", 1);
     formData.append("size", 20);
-    console.log(formData);
+    // console.log(formData);
     this.$http
       .post("/problemset", formData)
       .then(({data}) => {
-        console.log(data);
+        // console.log(data);
         this.problemSet = data.data;
       })
       .catch(err => {

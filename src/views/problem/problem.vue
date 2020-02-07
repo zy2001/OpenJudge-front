@@ -20,6 +20,7 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
+      
       this.$router.push('/problem/'+this.$route.params.pid+'/'+tab.name)
     },
     getTitle() {

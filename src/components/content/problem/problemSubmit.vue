@@ -37,7 +37,8 @@ export default {
     };
     return {
       submitForm: {
-        validLanguage: ["C", "C++", "JAVA"],
+        validLanguage: ["C++"],
+        // "C",, "JAVA"
         language: "C++",
         code: ""
       },
@@ -52,6 +53,16 @@ export default {
       this.$refs[formName].resetFields();
     },
     submit() {
+      if(this.$route.params.pid != 1 && this.$route.params.pid != 6) {
+        this.$message.warning("该题目暂时不可提交！")
+        return ;
+      }
+      if(this.$store.state.user.id == -1) {
+        
+        this.$store.commit("showLoginDialog", true)
+        this.$message("请登录后提交题目")
+        return ;
+      }
       this.$refs.submitForm.validate(valid => {
         if (valid) {
           let formData = new FormData();

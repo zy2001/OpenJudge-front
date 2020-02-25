@@ -18,7 +18,7 @@
     </el-table>
     <el-pagination
       @current-change="currentChange"
-      :current-page="5"
+      :current-page="1"
       :page-size="problemSet.size"
       layout="prev, pager, next"
       :total="problemSet.total"
@@ -28,9 +28,9 @@
 </template>
 
 <script>
+import { getProblemSet } from "network/post";
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       problemSet: {
@@ -40,7 +40,6 @@ export default {
       }
     };
   },
-  computed: {},
   methods: {
     acrate(scope) {
       if (scope.row.total === 0) return 100;
@@ -48,18 +47,18 @@ export default {
     },
     currentChange(page) {
       console.log(page);
+      getProblemSet(page, 20)
+      .then(({ data }) => {
+        this.problemSet = data.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
     }
   },
   created() {
-    console.log("problemSet created");
-    let formData = new FormData();
-    formData.append("page", 1);
-    formData.append("size", 20);
-    // console.log(formData);
-    this.$http
-      .post("/problemset", formData)
-      .then(({data}) => {
-        // console.log(data);
+    getProblemSet(1, 20)
+      .then(({ data }) => {
         this.problemSet = data.data;
       })
       .catch(err => {
@@ -75,9 +74,6 @@ export default {
   padding: 20px;
 }
 
-/* .el-main {
-  min-height: 850px;
-} */
 a {
   text-decoration: none;
 }

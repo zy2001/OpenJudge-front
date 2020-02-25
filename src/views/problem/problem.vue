@@ -11,22 +11,33 @@
 </template>
 
 <script>
-import ClipBoard from "clipboard";
 export default {
   data() {
     return {
-      activeName: "detail",
+      activeName: "",
     };
   },
   methods: {
     handleClick(tab, event) {
-      
       this.$router.push('/problem/'+this.$route.params.pid+'/'+tab.name)
+      this.activeName = tab.name
     },
     getTitle() {
       return this.$store.state.problem.title
-    }
+    },
   },
+  created() {
+    console.log(this.$route.path)
+    if(this.$route.path.indexOf("submit")  != -1){
+      this.activeName = "submit"
+    }
+    else if(this.$route.path.indexOf("status")  != -1){
+      this.activeName = "status"
+    }
+    else {
+      this.activeName = "detail"
+    }
+  }
 };
 </script>
 

@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { httpRegister } from "network/post";
 export default {
   data() {
     //检测用户名是否含有非法字符
@@ -125,33 +126,22 @@ export default {
   methods: {
     register() {
       this.$refs.registerForm.validate(valid => {
-        if (valid) {
-          //填写账号密码
-          let formData = new FormData();
-          formData.append("username", this.registerForm.username);
-          formData.append("password", this.registerForm.password);
-          // formData.append("email", this.registerForm.email);
-          //发送注册请求
-          this.$http
-            .post("/register", formData)
-            .then(({ data }) => {
-              // console.log(data);
-              //注册成功
-              if (data.success === true) {
-                this.$message.success(
-                  this.registerForm.username + "，注册成功!"
-                );
-                //关闭注册窗口
-                this.$store.commit("showRegisterDialog", false);
-              } else {
-                this.$message.error(data.message + "，注册失败!");
-              }
-            })
-            .catch(err => {
-              // console.log(err);
-              this.$message.error("网络异常，注册失败！");
-            });
-        }
+        if (!valid) return;
+        //发送注册请求
+        httpRegister(this.registerForm.username, this.registerForm.password)
+          .then(({ data }) => {
+            //注册成功
+            if (data.success === true) {
+              this.$message.success(this.registerForm.username + "，注册成功!");
+              //关闭注册窗口
+              this.$store.commit("showRegisterDialog", false);
+            } else {
+              this.$message.error(data.message + "，注册失败!");
+            }
+          })
+          .catch(err => {
+            this.$message.error("网络异常，注册失败！");
+          });
       });
     },
     //关闭注册窗口时重置注册表单

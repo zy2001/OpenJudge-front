@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { httpLogin } from "network/post";
 export default {
   data() {
     return {
@@ -45,38 +46,31 @@ export default {
   methods: {
     login() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          //填写账号密码
-          let formData = new FormData();
-          formData.append("username", this.loginForm.username);
-          formData.append("password", this.loginForm.password);
-          //发送登录请求
-          this.$http
-            .post("/login", formData)
-            .then(({ data }) => {
-              console.log(data);
-              if (data.success === true) {
-                //登陆成功
-                //存用户信息
-                let user = data.data;
-                window.sessionStorage.setItem("token", user.token);
-                window.sessionStorage.setItem("username", user.username);
-                window.sessionStorage.setItem("id", user.id);
-                this.$store.commit("login", user);
-                this.$message.success("欢迎回来，" + user.username + "!");
-                //关闭登录窗口
-                this.$store.commit('showLoginDialog', false)
-              } else {
-                this.$message.error(data.message + "，登陆失败！");
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              this.$message.error("网络异常，登陆失败！");
-            });
-        }
+        if (!valid) return;
+        //填写账号密码
+        httpLogin(this.loginForm.username, this.loginForm.password)
+          .then(({ data }) => {
+            console.log(data);
+            if (data.success === true) {
+              //登陆成功 存用户信息
+              let user = data.data;
+              window.sessionStorage.setItem("token", user.token);
+              window.sessionStorage.setItem("username", user.username);
+              window.sessionStorage.setItem("id", user.id);
+              this.$store.commit("login", user);
+              this.$message.success("欢迎回来，" + user.username + "!");
+              //关闭登录窗口
+              this.$store.commit("showLoginDialog", false);
+            } else {
+              this.$message.error(data.message + "，登陆失败！");
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            this.$message.error("网络异常，登陆失败！");
+          });
       });
-    },
+    }
   }
 };
 </script>

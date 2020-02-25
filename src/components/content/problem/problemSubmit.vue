@@ -6,7 +6,12 @@
       </el-select>
     </el-form-item>
     <el-form-item prop="code" label="源代码">
-      <el-input type="textarea" :autosize="{ minRows: 21, maxRows: 25}" :rows="2" v-model="submitForm.code"></el-input>
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 21, maxRows: 25}"
+        :rows="2"
+        v-model="submitForm.code"
+      ></el-input>
     </el-form-item>
     <el-form-item style="text-align: right">
       <el-button plain @click="submit">提交</el-button>
@@ -16,6 +21,7 @@
 </template>
 
 <script>
+import { httpPostSubmit } from "network/post";
 export default {
   data() {
     //检测选择的语言
@@ -53,40 +59,37 @@ export default {
       this.$refs[formName].resetFields();
     },
     submit() {
-      if(this.$route.params.pid != 1 && this.$route.params.pid != 6) {
-        this.$message.warning("该题目暂时不可提交！")
-        return ;
+      if (this.$route.params.pid != 1 && this.$route.params.pid != 6) {
+        this.$message.warning("该题目暂时不可提交！");
+        return;
       }
-      if(this.$store.state.user.id == -1) {
-        
-        this.$store.commit("showLoginDialog", true)
-        this.$message("请登录后提交题目")
-        return ;
+      if (this.$store.state.user.id == -1) {
+        this.$store.commit("showLoginDialog", true);
+        this.$message("请登录后提交题目");
+        return;
       }
       this.$refs.submitForm.validate(valid => {
-        if (valid) {
-          let formData = new FormData();
-          formData.append("pid", this.$route.params.pid);
-          formData.append("uid", this.$store.state.user.id);
-          formData.append("language", this.submitForm.language);
-          formData.append("code", this.submitForm.code);
-          this.$http
-            .post("/submit", formData)
-            .then(({ data }) => {
-              if (data.success === true) {
-                this.$message.success(data.message);
-                this.activeName = "status";
-                this.$router.push(
-                  "/problem/" + this.$route.params.pid + "/status"
-                );
-              } else {
-                this.$message.err(data.message + ",提交失败");
-              }
-            })
-            .catch(err => {
-              this.$message.error("网络异常,提交失败");
-            });
-        }
+        if (!valid) return;
+        httpPostSubmit(
+          this.$route.params.pid,
+          this.$store.state.user.id,
+          this.submitForm.language,
+          this.submitForm.code
+        )
+          .then(({ data }) => {
+            if (data.success === true) {
+              this.$message.success(data.message);
+              this.activeName = "status";
+              this.$router.push(
+                "/problem/" + this.$route.params.pid + "/status"
+              );
+            } else {
+              this.$message.err(data.message + ",提交失败");
+            }
+          })
+          .catch(err => {
+            this.$message.error("网络异常,提交失败");
+          });
       });
     }
   }

@@ -7,9 +7,6 @@ VueRouter.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error => error)
 }
 
-// import Index from 'views/index/index'
-// import ProblemSet from 'views/problemset/problemset'
-// import Problem from 'views/problem/problem'
 
 const Index = () => import('views/index/index')
 const ProblemSet = () => import('views/problemset/problemset')
@@ -17,6 +14,7 @@ const Problem = () => import('views/problem/problem')
 const ProblemDetail = () => import('components/content/problem/problemDetail')
 const ProblemSubmit = () => import('components/content/problem/problemSubmit')
 const ProblemSubmitStatus = () => import('components/content/problem/problemSubmitStatus')
+const Status = () => import('views/status/status')
 
 Vue.use(VueRouter)
 
@@ -32,6 +30,10 @@ const routes = [
   {
     path: '/problemset',
     component: ProblemSet
+  },
+  {
+    path: '/status',
+    component: Status,
   },
   {
     path: '/problem/:pid',

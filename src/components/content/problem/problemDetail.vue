@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { httpGetProblemDetail } from "network/get";
 export default {
   data() {
     return {
@@ -101,13 +102,11 @@ export default {
     }
   },
   created() {
-    // console.log('problem' + this.$route.params.pid+'created')
-    this.$http
-      .get("/problem/" + this.$route.params.pid)
+    httpGetProblemDetail(this.$route.params.pid)
       .then(({ data }) => {
         if (data.success === true) {
           this.problem = data.data;
-          this.$store.commit('setTitle', this.problem.title)
+          this.$store.commit("setTitle", this.problem.title);
         }
       })
       .catch(err => {

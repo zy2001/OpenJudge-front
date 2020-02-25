@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { getJudgeStatus } from "network/post";
 export default {
   data() {
     return {
@@ -74,10 +75,18 @@ export default {
   methods: {
     //status翻页
     currentChange(page) {
-      console.log(page);
+      getJudgeStatus(this.$route.params.pid, page, 20)
+        .then(({ data }) => {
+          if (data.success === true) {
+            this.submitStatus = data.data;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     getStatus(scope) {
-      if(scope.row.status == -1) return "系统错误"
+      if (scope.row.status == -1) return "系统错误";
       return this.statusText[scope.row.status];
     },
     getStyle(scope) {
@@ -85,21 +94,7 @@ export default {
     }
   },
   created() {
-    let formData = new FormData();
-    formData.append("pid", this.$route.params.pid);
-    formData.append("page", 1);
-    formData.append("size", 20);
-    this.$http
-      .post("/submitStatus", formData)
-      .then(({ data }) => {
-        // console.log(data);
-        if (data.success === true) {
-          this.submitStatus = data.data;
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.currentChange(1);
   }
 };
 </script>

@@ -1,34 +1,47 @@
 import Vue from 'vue'
-import { Button, Form, FormItem, Input, Message, Select, Option } from 'element-ui'
-import { Container, Header, Main, Footer } from 'element-ui'
-import { Menu, MenuItem, Submenu } from 'element-ui'
-import { Table, TableColumn,  Progress } from 'element-ui'
-import { Pagination } from 'element-ui'
-import { Tabs, TabPane, Dialog } from 'element-ui'
-
-Vue.use(Dialog)
-
-Vue.use(Tabs)
-Vue.use(TabPane)
-
-Vue.use(Pagination)
-
-Vue.use(Table)
-Vue.use(TableColumn)
-Vue.use(Progress)
-
-Vue.use(Menu)
-Vue.use(MenuItem)
-Vue.use(Submenu)
-Vue.use(Container)
-Vue.use(Header)
-Vue.use(Main)
-Vue.use(Footer)
-
-Vue.use(Option)
-Vue.use(Select)
+import { Button } from 'element-ui'
 Vue.use(Button)
+import { Carousel } from 'element-ui'
+Vue.use(Carousel)
+import { CarouselItem } from 'element-ui'
+Vue.use(CarouselItem)
+import { Container } from 'element-ui'
+Vue.use(Container)
+import { Dialog } from 'element-ui'
+Vue.use(Dialog)
+import { Footer } from 'element-ui'
+Vue.use(Footer)
+import { Form } from 'element-ui'
 Vue.use(Form)
+import { FormItem } from 'element-ui'
 Vue.use(FormItem)
+import { Header } from 'element-ui'
+Vue.use(Header)
+import { Input } from 'element-ui'
 Vue.use(Input)
-Vue.prototype.$message = Message
+import { Main } from 'element-ui'
+Vue.use(Main)
+import { Menu } from 'element-ui'
+Vue.use(Menu)
+import { MenuItem } from 'element-ui'
+Vue.use(MenuItem)
+import { Option } from 'element-ui'
+Vue.use(Option)
+import { Progress } from 'element-ui'
+Vue.use(Progress)
+import { Pagination } from 'element-ui'
+Vue.use(Pagination)
+import { Select } from 'element-ui'
+Vue.use(Select)
+import { Submenu } from 'element-ui'
+Vue.use(Submenu)
+import { Table } from 'element-ui'
+Vue.use(Table)
+import { Tabs } from 'element-ui'
+Vue.use(Tabs)
+import { Tag } from 'element-ui'
+Vue.use(Tag)
+import { TableColumn } from 'element-ui'
+Vue.use(TableColumn)
+import { TabPane } from 'element-ui'
+Vue.use(TabPane)

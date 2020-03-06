@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { httpRegister } from "network/post";
+import { httpRegister, httpCheckUsernameUsed } from "network/post";
 export default {
   data() {
     //检测用户名是否含有非法字符
@@ -65,10 +65,7 @@ export default {
     };
     //检测用户名是否可用
     var checkUsernameUsed = (rule, value, callback) => {
-      let formData = new FormData();
-      formData.append("username", value);
-      this.$http
-        .post("/checkUsernameUsed", formData)
+      httpCheckUsernameUsed(value)
         .then(({ data }) => {
           if (data.success === true) {
             callback();
@@ -132,15 +129,27 @@ export default {
           .then(({ data }) => {
             //注册成功
             if (data.success === true) {
-              this.$message.success(this.registerForm.username + "，注册成功!");
+              ELEMENT.Message({
+                message: this.registerForm.username + "，注册成功!",
+                type: "success",
+                customClass: "Message-Zindex"
+              });
               //关闭注册窗口
               this.$store.commit("showRegisterDialog", false);
             } else {
-              this.$message.error(data.message + "，注册失败!");
+              ELEMENT.Message({
+                message: data.message + "，注册失败！",
+                type: "error",
+                customClass: "Message-Zindex"
+              });
             }
           })
           .catch(err => {
-            this.$message.error("网络异常，注册失败！");
+            ELEMENT.Message({
+              message: "网络异常，登陆失败！",
+              type: "error",
+              customClass: "Message-Zindex"
+            });
           });
       });
     },

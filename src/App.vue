@@ -1,22 +1,33 @@
 <template>
   <div id="app">
-    
     <el-container>
-      <nav-bar v-show="show"></nav-bar>
+      <el-header v-show="show">
+        <nav-bar></nav-bar>
+      </el-header>
       <keep-alive>
         <router-view class="main"></router-view>
-      </keep-alive></el-container>
-      <el-footer v-show="show"></el-footer>
-    
+      </keep-alive>
+      <el-footer v-show="show">
+        <my-footer></my-footer>
+      </el-footer>
+    </el-container>
+    <login></login>
+    <register></register>
   </div>
 </template>
 
 <script>
 import NavBar from "components/content/nav_bar/navbar";
+import MyFooter from "components/content/footer/footer";
+import Login from "components/content/nav_bar/login";
+import Register from "components/content/nav_bar/register";
 export default {
   name: "app",
   components: {
-    NavBar
+    NavBar,
+    MyFooter,
+    Login,
+    Register
   },
   computed: {
     show() {
@@ -27,12 +38,6 @@ export default {
 </script>
 
 <style>
-.el-footer {
-  background-color: #ebeff1;
-  color: #333;
-  line-height: 60px;
-}
-
 .el-container {
   min-width: 1180px;
   width: 1180px;
@@ -40,7 +45,17 @@ export default {
 }
 
 .main {
-  margin-top: 60px;
-  min-height: 840px;
+  min-height: 849px;
 }
+
+.el-footer {
+  line-height: 30px;
+  background-color: #ebeff1;
+  color: #333;
+  text-align: center;
+}
+
+.Message-Zindex {
+    z-index:3000 !important;
+  }
 </style>

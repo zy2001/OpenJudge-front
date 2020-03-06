@@ -1,40 +1,36 @@
 <template>
-  <div>
-    <el-header class="header">
-      <el-menu router :default-active="getActive" class="nav_bar" mode="horizontal">
-        <el-menu-item index="/index">首页</el-menu-item>
-        <el-menu-item index="/problemset">题库</el-menu-item>
-        <!-- <el-menu-item index="/3">比赛</el-menu-item> -->
-        <el-menu-item index="/status">提交状态</el-menu-item>
-        <!-- <el-menu-item v-if="$store.state.user.id === -1" index="/login" style="float: right">登录</el-menu-item> -->
-        <el-menu-item
-          v-if="$store.state.user.id === -1"
-          @click="showLoginDialog"
-          style="float: right"
-        >登录</el-menu-item>
-        <el-menu-item
-          v-if="$store.state.user.id === -1"
-          @click="showRegisterDialog"
-          style="float: right"
-        >注册</el-menu-item>
-        <el-submenu v-if="$store.state.user.id !== -1" index="/7" style="width: 90px; float: right">
-          <template slot="title">{{$store.state.user.username}}</template>
-          <el-menu-item @click="logout">退出</el-menu-item>
-        </el-submenu>
-      </el-menu>
-    </el-header>
-    <login></login>
-    <register></register>
+  <div class="header">
+    <el-menu router :default-active="getActive" class="nav_bar" mode="horizontal">
+      <el-menu-item index="/index">首页</el-menu-item>
+      <el-menu-item index="/problemset">题库</el-menu-item>
+      <!-- <el-menu-item index="/3">比赛</el-menu-item> -->
+      <el-menu-item index="/status">提交状态</el-menu-item>
+      <!-- <el-menu-item v-if="$store.state.user.id === -1" index="/login" style="float: right">登录</el-menu-item> -->
+      <el-menu-item
+        v-if="$store.state.user.id === -1"
+        @click="showLoginDialog"
+        style="float: right"
+      >登录</el-menu-item>
+      <el-menu-item
+        v-if="$store.state.user.id === -1"
+        @click="showRegisterDialog"
+        style="float: right"
+      >注册</el-menu-item>
+      <el-submenu v-if="$store.state.user.id !== -1" index="/7" style="width: 90px; float: right">
+        <template slot="title">{{$store.state.user.username}}</template>
+        <el-menu-item @click="logout">退出</el-menu-item>
+      </el-submenu>
+    </el-menu>
+    <!-- </el-header> -->
+    
   </div>
 </template>
 
 <script>
-import Login from "components/content/nav_bar/login";
-import Register from "components/content/nav_bar/register";
+
 export default {
   components: {
-    Login,
-    Register
+   
   },
   data() {
     return {};

@@ -59,10 +59,6 @@ export default {
       this.$refs[formName].resetFields();
     },
     submit() {
-      if (this.$route.params.pid != 1 && this.$route.params.pid != 6) {
-        this.$message.warning("该题目暂时不可提交！");
-        return;
-      }
       if (this.$store.state.user.id == -1) {
         this.$store.commit("showLoginDialog", true);
         this.$message("请登录后提交题目");

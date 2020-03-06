@@ -54,4 +54,13 @@ let httpRegister = function (username, password) {
   return axios
     .post("/register", formData)
 }
-export { getJudgeStatus, httpPostSubmit, getProblemSet, httpLogin, httpRegister }
+
+//检测用户名是否可用
+let httpCheckUsernameUsed = function(username) {
+  let formData = new FormData();
+  formData.append("username", username);
+  //发送检测请求
+  return axios
+    .post("/checkUsernameUsed", formData)
+}
+export { getJudgeStatus, httpPostSubmit, getProblemSet, httpLogin, httpRegister, httpCheckUsernameUsed }

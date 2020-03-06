@@ -1,5 +1,11 @@
 module.exports = {
+  productionSourceMap: false,
   configureWebpack: {
+    externals: {
+      vue: 'Vue',
+      vuex: 'Vuex',
+      'element-ui': 'ELEMENT'
+    },
     resolve: {
       alias: {
         'assets': '@/assets',

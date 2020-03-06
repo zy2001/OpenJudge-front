@@ -91,6 +91,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
+        this.$forceUpdate();
     },
     getStatus(scope) {
       if (scope.row.status == -1) return "系统错误";
@@ -100,7 +101,7 @@ export default {
       return "color: " + this.statusColor[scope.row.status];
     }
   },
-  created() {
+  activated() {
     this.currentChange(1);
   }
 };
